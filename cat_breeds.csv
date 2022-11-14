@@ -1,4 +1,4 @@
-breed_ID, breed_name,origin,weight_kg, avg_lifespan, ear_shape, eye_shape, eye_color, coat_type, coat_color-coat_pattern, description
+breed_ID; breed_name;origin;weight_kg; avg_lifespan; ear_shape; eye_shape; eye_color; coat_type; coat_color-coat_pattern; description
 2;Russian Blue;Russia;3-5.5;15-20;pointed-tip;slanted;green;Shorthair;blue-Solid;Cat of long, lithe body and elegant look. Shy, gentle, intelligent. Reserved with strangers.
 3;Ocicat;United States of America;2.5-6.5;12-14;pointed-tip;almond-shaped;green/hazel/yellow/amber/gold/orange/copper;Shorthair;lilac-Tabby;Large spotted cat. Very athletic, active, sociable and playful.
 3;Ocicat;United States of America;2.5-6.5;12-14;pointed-tip;almond-shaped;green/hazel/yellow/amber/gold/orange/copper;Shorthair;fawn-Tabby;Large spotted cat. Very athletic, active, sociable and playful.
