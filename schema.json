@@ -1,0 +1,62 @@
+{
+  "title": "Cat Breeds",
+  "description": "A catalog of cat breeds and their features",
+  "type": "array",
+  "properties": {
+    "breed_ID": {
+      "description": "Unique identifier for a breed",
+      "type": "integer"
+    },
+    "breed_name": {
+      "description": "Name of the breed",
+      "type": "string"
+    },
+	"origin": {
+      "description": "Country where the breed is believed to originated from",
+      "type": "string"
+    },
+	"weight_kg": {
+      "description": "Average weight span of the breed measured in kilograms",
+      "type": "string"
+    },
+	"avg_lifespan": {
+      "description": "Average lifespan",
+      "type": "string"
+    },
+	"ear_shape": {
+      "description": "Shape of the ears",
+      "type": "string"
+    },
+	"eye_shape": {
+      "description": "Shape of the eyes",
+      "type": "string"
+    },
+	"eye_color": {
+      "description": "List of eye colors present in the breed",
+      "type": "array",
+	  "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+	"coat-type": {
+      "description": "Type of the coat based on fur length and shape",
+      "type": "string"
+    },
+	"coat": {
+      "description": "List of coat colors and patterns present in the breed",
+      "type": "array",
+        "items": {
+        "type": "object"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+	"description": {
+      "description": "Brief description of the breed",
+      "type": "string"
+    }
+  },
+  "required": [ "breed_id", "breed_name", "origin", "weight_kg", "avg_lifespan", "ear_shape", "eye_shape", "eye_color", "coat-type", "coat", "description" ]
+}
