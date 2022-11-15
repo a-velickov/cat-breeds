@@ -25,5 +25,5 @@ Please note that the separator used in CSV file is semicolon.
 | coat | list of coat colors and patterns present in the breed |
 | description | brief description of the breed |
 
-### Data structure
+### App
 Inside the app folder you can find source-code for a simple web app to display said info and data.
