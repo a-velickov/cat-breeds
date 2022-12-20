@@ -27,3 +27,7 @@ Please note that the separator used in CSV file is semicolon.
 
 ### App
 Inside the app folder you can find source-code for a simple web app to display said info and data.
+
+### Api
+A simple api for some general fetch and data manipulation. 
+Most code can be found in apilab3.js file and the documentation of given paths and possible responses can be found in openapi.json.
