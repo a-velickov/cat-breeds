@@ -6,6 +6,9 @@ const CreateFile = require('./create_file');
 
 module.exports = router;
 
+const apilab3 = require('./apilab3');
+router.use('/v2', apilab3);
+
 
 router.get('/catbreeds', async (req, res) => {
     limit = req.query.num;

@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Catalog of cat breeds",
+    "version": "3.0",
+    "contact": {
+      "name": "API Support",
+      "email": "Antonela.Velickov@fer.hr"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8010/api"
+    }
+  ],
+  "paths": {
+    "/v2/catbreeds": {
+      "get": {
+        "description": "Returns a collection of cat breeds",
+        "responses": {
+          "200": {
+            "description": "Fetch successfull"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "description": "Adds new cat breed to the database",
+        "requestBody": {
+          "description": "Create a new breed",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "weight": {
+                    "type": "string"
+                  },
+                  "lifespan": {
+                    "type": "string"
+                  },
+                  "desc": {
+                    "type": "string"
+                  },
+                  "coo": {
+                    "type": "string"
+                  },
+                  "ct": {
+                    "type": "string"
+                  },
+                  "eyecolors": {
+                    "type": "string"
+                  },
+                  "earhape": {
+                    "type": "string"
+                  },
+                  "eyeshape": {
+                    "type": "string"
+                  },
+                  "coats": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "weight",
+                  "lifespan",
+                  "desc",
+                  "coo",
+                  "ct",
+                  "eyecolors",
+                  "earshape",
+                  "eyeshape",
+                  "coats"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Create successfull"
+          },
+          "400": {
+            "description": "One or more of given body parameters are incorrect"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/catbreeds/id/{id}": {
+      "get": {
+        "description": "Returns cat breed with the given id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the cat breed",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch successful"
+          },
+          "400": {
+            "description": "Invalid id"
+          },
+          "404": {
+            "description": "Breed not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "description": "Returns breed with the given id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the cat breed",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch successfull"
+          },
+          "410": {
+            "description": "Breed was removed from the database"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes all data of the breed with given id from the database",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the cat breed",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "400": {
+            "description": "Invalid id"
+          },
+          "404": {
+            "description": "Breed not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/catbreeds/eyeshape/{es}": {
+      "get": {
+        "description": "Fetches all cat breed having given eye shape",
+        "parameters": [
+          {
+            "name": "es",
+            "in": "path",
+            "description": "One of the valid values for eye shapes of the cat breed",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch successfull"
+          },
+          "400": {
+            "description": "Invalid eye shape given"
+          },
+          "404": {
+            "description": "Breed with the given paramater not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/catbreeds/coat_type/{ct}": {
+      "get": {
+        "description": "Fetches all cat breed having given coat type",
+        "parameters": [
+          {
+            "name": "ct",
+            "in": "path",
+            "description": "One of the valid values for coat types of the cat breed",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch successfull"
+          },
+          "400": {
+            "description": "Invalid coat type given"
+          },
+          "404": {
+            "description": "Breed with the given paramater not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/catbreeds/countryoforigin/{coo}": {
+      "get": {
+        "description": "Fetches all cat breed containing given country of origin",
+        "parameters": [
+          {
+            "name": "coo",
+            "in": "path",
+            "description": "One of the possible countries of origin for cat breeds",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fetch successfull"
+          },
+          "400": {
+            "description": "Invalid country of origin given"
+          },
+          "404": {
+            "description": "Breed with the given paramater not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v2/catbreeds/openapi": {
+      "get": {
+        "description": "Fetches openapi.json document",
+        "responses": {
+          "200": {
+            "description": "Fetch successfull"
+          },
+          "404": {
+            "description": "File not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}

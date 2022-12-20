@@ -3,7 +3,10 @@ const http = require('http');
 const express = require('express');
 const app = express();
 
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 const port = process.env.PORT || 8010;
 const server = http.createServer(app);
@@ -13,6 +16,10 @@ server.listen(port, () => console.log("Server is running.."));
 
 const requests = require('./requests');
 app.use('/api', requests);
+
+app.get('/*', (req, res) => {
+    res.status(404).send({ status: "Not found", message: "The page you're looking for doesn't exist" });
+});
 
 
 //Handle production
