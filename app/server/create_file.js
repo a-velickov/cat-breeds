@@ -3,9 +3,11 @@ const DB = require('./database').DB;
 const path = require('path');
 
 class CreateFile {
-    static createCSV(breeds) {
+    static createCSV(breeds, mainfile) {
         const name = Date.now().toString() + '.csv';
-        let out = require("fs").createWriteStream(path.join(__dirname, 'temp-files', name));
+        let out = null;
+        if (mainfile) out = require("fs").createWriteStream(path.join(__dirname, '..', 'cat_breeds.csv'));
+        else out = require("fs").createWriteStream(path.join(__dirname, 'temp-files', name));
         out.write('breed_ID; breed_name;origin;weight_kg; avg_lifespan; ear_shape; eye_shape; eye_color; coat_type; coat_color-coat_pattern; description\n');
         for (let breed of breeds) {
             const coats = breed.coat.split(',');
@@ -21,9 +23,11 @@ class CreateFile {
         out.close();
         return name;
     }
-    static createJSON(breeds) {
+    static createJSON(breeds, mainfile) {
         const name = Date.now().toString() + '.json';
-        let out = require("fs").createWriteStream(path.join(__dirname, 'temp-files', name));
+        let out = null;
+        if (mainfile) out = require("fs").createWriteStream(path.join(__dirname, '..', 'cat_breeds.json'));
+        else out = require("fs").createWriteStream(path.join(__dirname, 'temp-files', name));
         out.write('[');
         const blen = breeds.length;
         let i = 1;

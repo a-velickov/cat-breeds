@@ -8,16 +8,30 @@ const fs = require('fs');
 
 
 module.exports = router;
+module.exports.getAllBreeds = getCatBreeds;
+
+const jsonLD = `{"@context": {
+	"origin": {
+		"@id": "https://schema.org/Country",
+		"@type": "https://schema.org/Text"
+	},
+	"ear-shape": {
+		"@id": "https://schema.org/SuperficialAnatomy",
+		"@type": "https://schema.org/Text"
+	}
+},`;
 
 
 
 router.get('/catbreeds', async (req, res) => {
     try {
         const catbreeds = await getCatBreeds();
+        let cb = `${jsonLD} "catbreeds": ${JSON.stringify(catbreeds)}}`;
+        console.log(cb);
         res.status(200).send({
             status: "OK",
             message: "Fetched all cat breeds",
-            response: catbreeds
+            response: JSON.parse(cb)
         });
     } catch (err) {
         res.status(500).send({
@@ -282,6 +296,7 @@ router.get('/catbreeds/id/:id', async (req, res) => {
     }
     try {
         const catbreed = await getCatBreed(id);
+        let cb = `${jsonLD} "catbreeds": ${JSON.stringify(catbreed)}}`;
         if (catbreed.length === 0) {
             res.status(404).send({
                 status: "Not found",
@@ -293,7 +308,7 @@ router.get('/catbreeds/id/:id', async (req, res) => {
             res.status(200).send({
                 status: "OK",
                 message: `Fetched cat breed with ID ${id}.`,
-                response: catbreed
+                response: JSON.parse(cb)
             });
         }
     }
@@ -386,8 +401,8 @@ router.all('/catbreeds/id/:id', async (req, res) => {
 
 router.get('/catbreeds/openapi', async (req, res) => {
     try {
-        if (fs.existsSync(path.join(__dirname, '..', '..', 'openapi.json'))) {
-            res.status(200).sendFile(path.join(__dirname, '..', '..', 'openapi.json'));
+        if (fs.existsSync(path.join(__dirname, '..', 'openapi.json'))) {
+            res.status(200).sendFile(path.join(__dirname, '..', 'openapi.json'));
         }
         else res.status(404).send({ status: "Not found", message: "The openapi file wasn't found." })
     } catch (err) {
@@ -398,10 +413,6 @@ router.get('/catbreeds/openapi', async (req, res) => {
             response: null
         });
     }
-});
-
-router.all('/catbreeds/openapi', async (req, res) => {
-    res.status(501).send({ status: "Not implemented", message: "The requested method is not implemented.", response: null });
 });
 
 //bar jos 3 get
@@ -427,6 +438,7 @@ router.get('/catbreeds/eyeshape/:es', async (req, res) => {
             return;
         }
         const catbreeds = await getCatBreedbyES(es);
+        let cb = `${jsonLD} "catbreeds": ${JSON.stringify(catbreeds)}}`;
         //console.log(catbreeds.length);
         if (catbreeds.length === 0) {
             res.status(404).send({
@@ -439,7 +451,7 @@ router.get('/catbreeds/eyeshape/:es', async (req, res) => {
             res.status(200).send({
                 status: "OK",
                 message: `Fetched all cat breeds with eye color ${es}.`,
-                response: catbreeds
+                response: JSON.parse(cb)
             });
         }
     }
@@ -482,6 +494,7 @@ router.get('/catbreeds/coat_type/:ct', async (req, res) => {
             return;
         }
         const catbreeds = await getCatBreedbyCT(ct);
+        let cb = `${jsonLD} "catbreeds": ${JSON.stringify(catbreeds)}}`;
         if (catbreeds.length === 0) {
             res.status(404).send({
                 status: "Not found",
@@ -493,7 +506,7 @@ router.get('/catbreeds/coat_type/:ct', async (req, res) => {
             res.status(200).send({
                 status: "OK",
                 message: `Fetched cat breed with coat type ${ct}.`,
-                response: catbreeds
+                response: JSON.parse(cb)
             });
         }
     }
@@ -536,6 +549,7 @@ router.get('/catbreeds/countryoforigin/:coo', async (req, res) => {
             return;
         }
         const catbreeds = await getCatBreedbyCOO(coo);
+        let cb = `${jsonLD} "catbreeds": ${JSON.stringify(catbreeds)}}`;
         if (catbreeds.length === 0) {
             res.status(404).send({
                 status: "Not found",
@@ -547,7 +561,7 @@ router.get('/catbreeds/countryoforigin/:coo', async (req, res) => {
             res.status(200).send({
                 status: "OK",
                 message: `Fetched all cat breeds whose country of origin is ${coo}.`,
-                response: catbreeds
+                response: JSON.parse(cb)
             });
         }
     }

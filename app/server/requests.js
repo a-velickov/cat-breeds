@@ -21,6 +21,30 @@ router.get('/catbreeds', async (req, res) => {
     }
 });
 
+const { getAllBreeds } = require('./apilab3');
+
+router.get('/refresh', async (req, res) => {
+    const catbreeds = await getAllBreeds();
+    //console.log(catbreeds);
+    CreateFile.createJSON(catbreeds, true);
+    CreateFile.createCSV(catbreeds, true);
+    res.status(200).send(true);
+});
+
+router.get('/userpage', async (req, res) => {
+    let user = {};
+    if (req.oidc.isAuthenticated()) {
+        user.username = await req.oidc.user.nickname;
+        user.email = await req.oidc.user.email;
+        user.picture = await req.oidc.user.picture;
+
+        //console.log(user);
+        res.send(user);
+        return
+    }
+    else res.redirect('/login');
+});
+
 router.get('/originalcsv', async (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'cat_breeds.csv'));
 });
@@ -46,7 +70,7 @@ router.get('/createfile/json', async (req, res) => {
     const page = 1;
     if (search_input === '') return res.send('');
     const catbreeds = await getBreedwSearch(search_param, search_input, limit, page);
-    const json_file = CreateFile.createJSON(catbreeds);
+    const json_file = CreateFile.createJSON(catbreeds, false);
     res.send(json_file);
 });
 
@@ -58,7 +82,7 @@ router.get('/createfile/csv', async (req, res) => {
     const page = 1;
     if (search_input === '') res.send('');
     const catbreeds = await getBreedwSearch(search_param, search_input, limit, page);
-    const csv_file = CreateFile.createCSV(catbreeds);
+    const csv_file = CreateFile.createCSV(catbreeds, false);
     res.send(csv_file);
 });
 

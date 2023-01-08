@@ -1,38 +1,12 @@
 <template>
-    <NavBar @mount-table="mountTable" @mount-home="mountHome"/>
-    <HomeComponent v-if="hmount"/>
-    <DataTable v-if="tmount"/>
+    <router-view></router-view>
 </template>
 
 <script>
-    import DataTable from './components/DataTable.vue'
-    import NavBar from './components/NavBar.vue'
-    import HomeComponent from './components/Home.vue'
 
     export default {
-        name: 'App',
-        components: {
-            NavBar,
-            DataTable,
-            HomeComponent
-        },
-        data() {
-            return {
-                tmount: false,
-                hmount: true
-            }
-        },
-        methods: {
-            mountHome() {
-                this.hmount = true;
-                this.tmount = false;
-            },
-            mountTable() {
-                this.tmount = true;
-                this.hmount = false;
-            }
-        }
-}
+        name: 'App'
+    }
 </script>
 
 <style>
